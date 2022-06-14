@@ -1,7 +1,15 @@
 #!/bin/sh
 set -e
 
-curl -sSL https://get.docker.com | sh
+command_exists() {
+	command -v "$@" > /dev/null 2>&1
+}
+
+if command_exists docker; then
+    echo "Docker already installed"
+else
+    curl -sSL https://get.docker.com | sh
+fi
 
 docker run --rm -i \
   -v /etc/easypanel:/etc/easypanel \
