@@ -2,13 +2,13 @@
 set -e
 
 command_exists() {
-	command -v "$@" > /dev/null 2>&1
+  command -v "$@" > /dev/null 2>&1
 }
 
 if command_exists docker; then
-    echo "Docker already installed"
+  echo "Docker already installed"
 else
-    curl -sSL https://get.docker.com | sh
+  curl -sSL https://get.docker.com | sh
 fi
 
 docker run --rm -i \
