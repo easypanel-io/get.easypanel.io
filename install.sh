@@ -11,7 +11,7 @@ else
   curl -sSL https://get.docker.com | sh
 fi
 
-docker swarm leave
+docker swarm leave &> /dev/null || true
 
 docker run --rm -i \
   -v /etc/easypanel:/etc/easypanel \
