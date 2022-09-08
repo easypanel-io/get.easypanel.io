@@ -13,6 +13,8 @@ fi
 
 docker swarm leave --force 1> /dev/null 2> /dev/null || true
 
+docker pull easypanel/easypanel:latest
+
 docker run --rm -i \
   -v /etc/easypanel:/etc/easypanel \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
