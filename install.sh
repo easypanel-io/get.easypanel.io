@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+# check if the current user is root
+if [ "$(id -u)" != "0" ]; then
+    echo "Error: you must be root to execute this script" >&2
+    exit 1
+fi
+
 command_exists() {
   command -v "$@" > /dev/null 2>&1
 }
