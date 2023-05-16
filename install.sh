@@ -13,6 +13,12 @@ if [ "$(uname)" = "Darwin" ]; then
     exit 1
 fi
 
+# check if is running inside a container
+if [ -f /.dockerenv ]; then
+    echo "Error: running inside a container is not supported" >&2
+    exit 1
+fi
+
 command_exists() {
   command -v "$@" > /dev/null 2>&1
 }
