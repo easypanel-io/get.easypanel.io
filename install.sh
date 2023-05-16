@@ -8,7 +8,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # check if is Mac OS
-if [ "$(uname)" != "Darwin" ]; then
+if [ "$(uname)" == "Darwin" ]; then
     echo "Error: MacOS is not supported" >&2
     exit 1
 fi
