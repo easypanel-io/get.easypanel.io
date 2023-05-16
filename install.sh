@@ -7,6 +7,12 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+# check if is Mac OS
+if [ "$(uname)" != "Darwin" ]; then
+    echo "Error: MacOS is not supported" >&2
+    exit 1
+fi
+
 command_exists() {
   command -v "$@" > /dev/null 2>&1
 }
