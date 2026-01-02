@@ -57,7 +57,7 @@ EOF
 
 sudo apt update
 
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 fi
 
 docker swarm leave --force 1> /dev/null 2> /dev/null || true
