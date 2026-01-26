@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+command_exists() {
+  command -v "$@" > /dev/null 2>&1
+}
+
 # check if the current user is root
 if [ "$(id -u)" != "0" ]; then
     echo "Error: you must be root to execute this script" >&2
@@ -19,6 +23,13 @@ if [ -f /.dockerenv ]; then
     exit 1
 fi
 
+
+# check if lsof is installed
+if ! command_exists lsof
+then
+    apt install -y lsof
+fi
+
 # check if something is running on port 80
 if lsof -i :80 -sTCP:LISTEN >/dev/null; then
     echo "Error: something is already running on port 80" >&2
@@ -30,10 +41,6 @@ if lsof -i :443 -sTCP:LISTEN >/dev/null; then
     echo "Error: something is already running on port 443" >&2
     exit 1
 fi
-
-command_exists() {
-  command -v "$@" > /dev/null 2>&1
-}
 
 if command_exists docker; then
   echo "Docker already installed"
@@ -49,7 +56,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 # Add the repository to Apt sources:
 sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
 Types: deb
-URIs: https://download.docker.com/linux/ubuntu
+URIs: https://download.docker.com/linux/$(. /etc/os-release && echo "${ID:-ubuntu}")
 Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
 Components: stable
 Signed-By: /etc/apt/keyrings/docker.asc
