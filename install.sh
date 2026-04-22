@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+export DEBIAN_FRONTEND=noninteractive
+
 # check if the current user is root
 if [ "$(id -u)" != "0" ]; then
     echo "Error: you must be root to execute this script" >&2
@@ -41,7 +43,7 @@ else
   # curl -sSL https://get.docker.com | sh
 # Add Docker's official GPG key:
 sudo apt update
-sudo apt install ca-certificates curl
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
