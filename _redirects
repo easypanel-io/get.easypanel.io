@@ -1,1 +1,4 @@
 / /install.sh
+/cli /install-cli.sh
+/cli/ /install-cli.sh
+/cli.ps1 /install-cli.ps1
